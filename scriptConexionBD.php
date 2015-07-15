@@ -6,8 +6,8 @@
 <?php
 function dbConnect() {
     $servername = "localhost";
-    $username = "ejercicio_pw";
-    $password = "pass_ejercicio_pw";
+    $username = "root";
+    $password = "1234";
     $dbname = "dropbox";
 
 // Create connection
