@@ -5,7 +5,6 @@
 
 -->
 <?php
-
 include_once ('scriptConexionBD.php');
 $conn = dbConnect();
 session_start();
@@ -21,6 +20,10 @@ $Pass = md5($_POST['pass']);
  */
 $sql = "select correo from usuarios where correo='$Correo'";
 $result = mysqli_query($conn, $sql);
+
+$sql = "select login from usuarios where login='$Login'";
+$result1 = mysqli_query($conn, $sql);
+
 if ($result->num_rows == 1) {
     mysqli_close($conn);
     ?>
@@ -29,19 +32,27 @@ if ($result->num_rows == 1) {
         window.history.back();
     </script>
     <?php
-
+    
+} else if ($result1->num_rows == 1) {
+    mysqli_close($conn);
+    ?>
+    <script languaje="javascript">
+        alert("ERROR: Este login ya está usado.");
+        window.history.back();
+    </script>
+    <?php
 } else {
-
-    $sql = "INSERT INTO usuarios VALUES ('$Correo', '$Login', '$Pass', '2015/07/16');";
+    $ahora =  date("d/m/Y H:i:s",time());
+    $sql = "INSERT INTO usuarios VALUES ('$Correo', '$Login', '$Pass', '$ahora');";
 
     if (mysqli_query($conn, $sql)) {
+        mysqli_close($conn);
         ?>
         <script languaje="javascript">
             alert("La cuenta ha sido creada correctamente.");
             location.href = "index.php";
         </script>
         <?php
-       
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
