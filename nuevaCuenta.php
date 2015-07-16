@@ -1,0 +1,57 @@
+<!-- 
+
+  Página desde donde se accede a las páginas principales de los usuarios.
+
+-->
+
+
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" http-equiv="content-type" content="width=device-width, initial-scale=1.0"/>
+        <meta content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.css">
+        <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script src="js/dropzone.js"></script>
+    </head>
+    <body>
+        <div id="container">
+
+            <div class="form-inline">
+                <div class="panel-body">
+                    <form action="scriptInsertarUsuario.php" method="post">
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <input name="correo" type="email" class="form-control" placeholder="e-mail" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <br>
+                        <br>
+                        
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <input name="login" type="text" class="form-control" placeholder="Login" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <br>
+                        <br>
+                        
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                        </div>
+                        
+                        <br>
+                        <br>
+                         <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Iniciar sesión</button>
+                    </form>
+
+                </div></div>      
+
+        </div>
+    </body>
+</html>
