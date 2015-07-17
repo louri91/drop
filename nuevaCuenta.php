@@ -18,14 +18,16 @@
         <script src="js/dropzone.js"></script>
     </head>
     <body>
-        <div id="container">
-
+        <div id="container" style="width: 30%; margin-left: auto; margin-right: auto; position: relative">
+            <div class="panel panel-primary" style="text-align: center; position: absolute; margin-top: 40%; transform: translate(0, -50%);">
+            <div class="panel-heading">Registro</div>
+             <div class="panel-body">
             <div class="form-inline">
                 <div class="panel-body">
                     <form action="scriptInsertarUsuario.php" method="post">
 
                         <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
                             <input name="correo" type="email" class="form-control" placeholder="e-mail" aria-describedby="basic-addon1">
                         </div>
                         
@@ -33,7 +35,7 @@
                         <br>
                         
                         <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
                             <input name="login" type="text" class="form-control" placeholder="Login" aria-describedby="basic-addon1">
                         </div>
                         
@@ -41,7 +43,7 @@
                         <br>
                         
                         <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
                             <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
                         </div>
                         
@@ -51,7 +53,8 @@
                     </form>
 
                 </div></div>      
-
+                </div>
+                </div>
         </div>
     </body>
 </html>
