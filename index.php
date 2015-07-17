@@ -3,8 +3,6 @@
   Página desde donde se accede a las páginas principales de los usuarios.
 
 -->
-
-
 <html>
     <head>
         <meta charset='utf-8'>
@@ -18,6 +16,7 @@
         <script src="js/dropzone.js"></script>
     </head>
     <body>
+
         <div id="container" style="width: 30%; margin-left: auto; margin-right: auto; position: relative">
 			<div class="panel panel-primary" style="text-align: center; position: absolute; margin-top: 40%; transform: translate(0, -50%);">
 			<div class="panel-heading">Iniciar sesión</div>
@@ -28,19 +27,30 @@
 
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                            <input name="user" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                            <input name="user" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" required>
                         </div>
                         <br>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
-                            <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                            <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>
                         </div>
                         <br>
                         <br>
                          <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Iniciar sesión</button>
                     </form>
                     <a id="newCuenta" href="nuevaCuenta.php">Registrarse</a>
+                    <br>
+                    <?php 
+                    /* Comprobamos si ha habido algún error y lo mostramos como una alerta*/
+                    if (isset($_GET['success'])){
+                    	echo '<br>';
+                        echo '<div class="alert alert-success" role="alert">';
+                        echo 'La cuenta ha sido creada correctamente. Inicie sesión.';
+                        echo '</div>';
+                    }
+
+                    ?>
 
                 </div></div>
                 </div>

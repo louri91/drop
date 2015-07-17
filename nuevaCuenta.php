@@ -28,7 +28,7 @@
 
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
-                            <input name="correo" type="email" class="form-control" placeholder="e-mail" aria-describedby="basic-addon1">
+                            <input name="correo" type="email" class="form-control" placeholder="e-mail" aria-describedby="basic-addon1" required>
                         </div>
                         
                         <br>
@@ -36,7 +36,7 @@
                         
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                            <input name="login" type="text" class="form-control" placeholder="Login" aria-describedby="basic-addon1">
+                            <input name="login" type="text" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1" required>
                         </div>
                         
                         <br>
@@ -44,14 +44,23 @@
                         
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
-                            <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                            <input name="pass" type="password" class="form-control" placeholder="Contraseña" aria-describedby="basic-addon1" required>
                         </div>
                         
                         <br>
                         <br>
-                         <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Iniciar sesión</button>
+                         <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Registro</button>
+                        
                     </form>
+                            <?php 
+                            /* Comprobamos si ha habido algún error y lo mostramos como una alerta*/
+                            if (isset($_GET['error'])){
+                                echo '<div class="alert alert-danger" role="alert">';
+                                echo $_GET['error'];
+                                echo '</div>';
+                            }
 
+                            ?>
                 </div></div>      
                 </div>
                 </div>
