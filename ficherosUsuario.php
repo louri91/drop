@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="ficherosUsuario.php">Inicio <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="formulario.php">Subir Ficheros</a></li>
         <li><a href="#">Link</a></li>
       </ul>
     <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  '.$_SESSION['usuario'];?></div>
@@ -47,9 +47,8 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-    <div id="container" style="width: auto; position: relative; margin-right: 5%; margin-left: 5%;">
-    <div class="panel panel-default" style="width: 100% ; text-align: left; position: absolute; margin-top: 8%;">
-    <div class="panel-heading">Lista de Ficheros</div>
+    <div class="container" style="width: auto; margin-left: auto; margin-right: auto; position: relative">
+    <div class="panel panel-default" style="margin-top: 5%;">
     <div class="panel-body">
     <div class="form-inline">
     <div class="panel-body">

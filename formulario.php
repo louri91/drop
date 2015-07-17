@@ -1,4 +1,4 @@
-<html>
+<html><?php session_start(); ?>
     <head>
     <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,10 +15,45 @@
     </head>
     <body>
     
-        <div class="bodybg">
+    <div class="bodybg">
+
+<!--  MENU  -->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Drop</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="ficherosUsuario.php">Inicio <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="formulario.php">Subir Ficheros</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  '.$_SESSION['usuario'];?></div>
+
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" id="busqueda" name="busqueda" onkeyup="MostrarConsultaNombre();" class="form-control" placeholder="Buscar">
+        </div>
+      </form>
+        
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
     <div class="container" style="width: auto; margin-left: auto; margin-right: auto; position: relative">
       <div class="panel panel-default" style="margin-top: 5%;">
-        <div class="panel-heading"><strong>Subir archivos</strong></div>
         <div class="panel-body">
 
           <!-- Standar Form -->
