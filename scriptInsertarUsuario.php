@@ -54,7 +54,7 @@ if (strlen($Pass) > 5) { //Solamente si la contraseña tiene mínimo 5 caractere
             //header('Location: index.php?success='.$Success);
             ?>
             <script languaje="javascript">
-                location.href = "nuevaCuenta.php?error=<?php echo $Success ?>";
+                location.href = "index.php?success=<?php echo $Success ?>";
             </script>
             <?php
         } else {
