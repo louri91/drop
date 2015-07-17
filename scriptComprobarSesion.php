@@ -21,12 +21,8 @@ $result = mysqli_query($conn, $sql);
 //Muestra el error y redirige al index
 if ($result->num_rows == 0) {
     mysqli_close($conn);
-    ?>
-    <script languaje="javascript">
-        alert("Usuario o contraseña incorrecto.");
-        location.href = "index.php";
-    </script>
-    <?php
+    $Error = "Usuario o contraseña incorrectos";
+    header('Location: index.php?error='.$Error);
 
 } else {
 	
@@ -46,13 +42,9 @@ if ($result->num_rows == 0) {
     $conex = date("d/m/Y H:i:s", strtotime($conex));
     
     mysqli_close($conn);
-    ?>
-    <script languaje="javascript">
-        alert("Última conexión: <?php echo $conex ?>");
-        location.href = "formulario.php";
-    </script>
-    <?php
-	
+    
+    header('Location: formulario.php?ult='.$conex);
+
     }
 	
 ?>

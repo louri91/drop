@@ -42,11 +42,17 @@
                     <a id="newCuenta" href="nuevaCuenta.php">Registrarse</a>
                     <br>
                     <?php 
-                    /* Comprobamos si ha habido algún error y lo mostramos como una alerta*/
+
                     if (isset($_GET['success'])){
                     	echo '<br>';
                         echo '<div class="alert alert-success" role="alert">';
                         echo 'La cuenta ha sido creada correctamente. Inicie sesión.';
+                        echo '</div>';
+                    }
+                    /* Comprobamos si ha habido algún error y lo mostramos como una alerta*/
+                    if (isset($_GET['error'])){
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $_GET['error'];
                         echo '</div>';
                     }
 

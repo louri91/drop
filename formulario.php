@@ -13,6 +13,16 @@
    <script src="js/dropzone.js"></script>
     </head>
     <body>
+    <?php 
+    if(isset($_GET['ult'])){
+      echo '<br>';
+      echo '<div class="container" style="width: auto; text-align: right">';
+      echo '<div class="alert alert-info" role="alert">';
+      echo 'Última conexión: '.$_GET['ult'];
+      echo '</div></div>';
+    }
+
+    ?>
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading"><strong>Subir archivos</strong></div>
