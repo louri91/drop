@@ -12,14 +12,16 @@
         <meta name="viewport" http-equiv="content-type" content="width=device-width, initial-scale=1.0"/>
         <meta content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
         <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script src="js/dropzone.js"></script>
     </head>
     <body>
+        <div class="bodybg">
         <div id="container" style="width: 30%; margin-left: auto; margin-right: auto; position: relative">
-            <div class="panel panel-primary" style="text-align: center; position: absolute; margin-top: 40%; transform: translate(0, -50%);">
+            <div class="panel panel-default" style="text-align: center; position: absolute; margin-top: 40%; transform: translate(0, -50%);">
             <div class="panel-heading">Registro</div>
              <div class="panel-body">
             <div class="form-inline">
@@ -64,6 +66,6 @@
                 </div></div>      
                 </div>
                 </div>
-        </div>
+        </div></div>
     </body>
 </html>

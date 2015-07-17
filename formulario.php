@@ -5,6 +5,7 @@
    <meta name="viewport" http-equiv="content-type" content="width=device-width, initial-scale=1.0"/>
    <meta content="text/html; charset=utf-8" />
    <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/css.css">
    <link rel="stylesheet" href="css/bootstrap-theme.css">
    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
    <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -13,18 +14,10 @@
    <script src="js/dropzone.js"></script>
     </head>
     <body>
-    <?php 
-    if(isset($_GET['ult'])){
-      echo '<br>';
-      echo '<div class="container" style="width: auto; text-align: right">';
-      echo '<div class="alert alert-info" role="alert">';
-      echo 'Última conexión: '.$_GET['ult'];
-      echo '</div></div>';
-    }
-
-    ?>
-    <div class="container">
-      <div class="panel panel-default">
+    
+        <div class="bodybg">
+    <div class="container" style="width: auto; margin-left: auto; margin-right: auto; position: relative">
+      <div class="panel panel-default" style="margin-top: 5%;">
         <div class="panel-heading"><strong>Subir archivos</strong></div>
         <div class="panel-body">
 
@@ -59,9 +52,19 @@
               <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Terminado</span>image-01.jpg</a>
               <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Terminado</span>image-02.jpg</a>
             </div>
+            <?php 
+              if(isset($_GET['ult'])){
+                echo '<br>';
+                echo '<div class="container" style="width: auto; text-align: right">';
+                echo '<div class="alert alert-info" role="alert">';
+                echo 'Última conexión: '.$_GET['ult'];
+                echo '</div></div>';
+              }
+
+              ?>
           </div>
         </div>
       </div>
-    </div> <!-- /container -->
+    </div></div> <!-- /container -->
     </body>
 </html>
