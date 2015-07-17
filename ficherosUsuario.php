@@ -1,4 +1,4 @@
-<html>
+<html><?php session_start(); ?>
     <head>
         <title>Inicio</title>
         <meta charset='utf-8'>
@@ -33,7 +33,7 @@
         <li><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
       </ul>
-    <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span></div>
+    <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  '.$_SESSION['usuario'];?></div>
 
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -53,7 +53,6 @@
     <div class="form-inline">
     <div class="panel-body">
         <?php
-        session_start();
         $Login = $_SESSION['usuario'];
         include_once 'scriptConexionBD.php';
         $conn = dbConnect();
