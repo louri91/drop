@@ -12,8 +12,42 @@
     </head>
     <body>
     <div class="bodybg">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Drop</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="ficherosUsuario.php">Inicio <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span></div>
+
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Buscar">
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+      </form>
+        
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
     <div id="container" style="width: auto; position: relative; margin-right: 5%; margin-left: 5%;">
-    <div class="panel panel-default" style="width: 100% ; text-align: left; position: absolute; margin-top: 5%;">
+    <div class="panel panel-default" style="width: 100% ; text-align: left; position: absolute; margin-top: 8%;">
     <div class="panel-heading">Lista de Ficheros</div>
     <div class="panel-body">
     <div class="form-inline">
