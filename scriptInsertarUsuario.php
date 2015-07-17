@@ -13,10 +13,8 @@ session_start();
 $Correo = trim($_POST['correo']); /* Con la función trim eliminamos los espacios en blanco que se hayan podido insertar al inicio y al final de la cadena. */
 $Login = trim($_POST['login']);
 $Pass = $_POST['pass'];
-if ($Pass > 5) { //Solamente si la contraseña tiene mínimo 5 caracteres dejamos que siga, sino no
+if (strlen($Pass) > 5) { //Solamente si la contraseña tiene mínimo 5 caracteres dejamos que siga, sino no
     $Pass = md5($Pass);
-
-
     /*
      * Comprueba que el cliente no esté creado, de ser así lanza un error y vuelve al
      * cuestionario. 
