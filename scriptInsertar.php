@@ -5,8 +5,10 @@
 -->
 
 <?php
+session_start();
 include_once ('scriptConexionBD.php');
 $conn = dbConnect();
+$Login = $_SESSION['usuario'];
 if (!empty($_FILES)) {
     $Nombre = $_FILES['archivo']['name'];
     $Tipo = $_FILES['archivo']['type'];
@@ -20,7 +22,7 @@ if (!empty($_FILES)) {
     $contenido = addslashes($contenido);
     fclose($fp);
 
-    $sql = "INSERT INTO archivos VALUES (0, '$Nombre', '$contenido', '$Tipo', '$fechaHoy', '$Tam', 'admin', 'admin');";
+    $sql = "INSERT INTO archivos VALUES (0, '$Nombre', '$contenido', '$Tipo', '$fechaHoy', '$Tam', 'correo', '$Login');";
 
     if (mysqli_query($conn, $sql)) {
         mysqli_close($conn);

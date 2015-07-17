@@ -28,10 +28,7 @@ if ($result->num_rows == 0) {
 	
     $_SESSION['usuario'] = $Login;
     
-    $ahora =  date("d/m/Y H:i:s",time());
-    
-    $sql = "UPDATE usuarios SET ultConexion = '$ahora' WHERE login='$Login';";
-    $result = mysqli_query($conn, $sql);
+    $ahora =  date("Y/m/d H:i:s",time());
     
     $sql = "SELECT ultConexion FROM usuarios WHERE login='$Login';";
     $result = mysqli_query($conn, $sql);
@@ -41,9 +38,12 @@ if ($result->num_rows == 0) {
     }
     $conex = date("d/m/Y H:i:s", strtotime($conex));
     
+    $sql = "UPDATE usuarios SET ultConexion = '$ahora' WHERE login='$Login';";
+    $result = mysqli_query($conn, $sql);
+    
     mysqli_close($conn);
     
-    header('Location: formulario.php?ult='.$conex);
+    header('Location: ficherosUsuario.php?ult='.$conex);
 
     }
 	

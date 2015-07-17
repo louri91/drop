@@ -7,8 +7,9 @@
 <?php
 include_once ('scriptConexionBD.php');
 $conn = dbConnect();
+$id = $_GET['id'];
 
-$sql = "SELECT tipo, contenido FROM archivos WHERE id=6;";
+$sql = "SELECT tipo, contenido FROM archivos WHERE id='$id';";
 
 $result = mysqli_query($conn, $sql);
 
