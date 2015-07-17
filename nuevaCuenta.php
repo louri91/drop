@@ -21,7 +21,7 @@
     <body>
         <div class="bodybg">
         <div id="container" style="width: 30%; margin-left: auto; margin-right: auto; position: relative">
-            <div class="panel panel-default" style="text-align: center; position: absolute; margin-top: 40%; transform: translate(0, -50%);">
+            <div class="panel panel-default" style="text-align: center; position: absolute; margin-top: 40%;">
             <div class="panel-heading">Registro</div>
              <div class="panel-body">
             <div class="form-inline">
