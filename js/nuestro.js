@@ -1,37 +1,27 @@
-//No es mio, lo he encontrado por internet la función, tenemos que aprender a utilizar JQuery! jajaja
 
-+ function($) {
-    'use strict';
+/*Función AJAX que busca ficheros.*/
 
-    var dropZone = document.getElementById('drop-zone');
-    var uploadForm = document.getElementById('js-upload-form');
+function objetoAjax () { 
+     var obj; //variable que recogerá el objeto
+         if (window.XMLHttpRequest) { //código para mayoría de navegadores
+            obj=new XMLHttpRequest();
+         }
+         else { //para IE 5 y IE 6
+            obj=new ActiveXObject(Microsoft.XMLHTTP);
+        }
+        return obj; //devolvemos objeto
+}
 
-    var startUpload = function(files) {
-        console.log(files)
+function MostrarConsultaNombre(){
+    var divResultado = document.getElementById('ficheros');
+    var busqueda = document.getElementById('busqueda').value;
+    
+    var ajax=objetoAjax();
+    ajax.open("GET", "scriptBusquedaFicheros.php?busqueda="+busqueda);
+    ajax.onreadystatechange=function() {
+        if (ajax.readyState==4) {
+            divResultado.innerHTML = ajax.responseText;
+        }
     }
-
-    uploadForm.addEventListener('Enviar', function(e) {
-        var uploadFiles = document.getElementById('js-upload-files').files;
-        e.preventDefault()
-
-        startUpload(uploadFiles)
-    })
-
-    dropZone.ondrop = function(e) {
-        e.preventDefault();
-        this.className = 'upload-drop-zone';
-
-        startUpload(e.dataTransfer.files)
-    }
-
-    dropZone.ondragover = function() {
-        this.className = 'upload-drop-zone drop';
-        return false;
-    }
-
-    dropZone.ondragleave = function() {
-        this.className = 'upload-drop-zone';
-        return false;
-    }
-
-}(jQuery);
+    ajax.send(null);
+}

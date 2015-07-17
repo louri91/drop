@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
         <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/nuestro.js"></script>
+
     </head>
     <body>
     <div class="bodybg">
@@ -37,9 +39,8 @@
 
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar">
+          <input type="text" id="busqueda" name="busqueda" onkeyup="MostrarConsultaNombre();" class="form-control" placeholder="Buscar">
         </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
       </form>
         
     </div><!-- /.navbar-collapse -->
@@ -65,7 +66,7 @@
         echo '<th>Tamaño</th>';
         echo '<th>Fecha de Creación</th>';
         echo '</thead>';
-        echo '<tbody>';
+        echo '<tbody id="ficheros">';
         while ($archivo = mysqli_fetch_assoc($result)) {
             ?>
            
