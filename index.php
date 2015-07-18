@@ -3,6 +3,28 @@
   Página desde donde se accede a las páginas principales de los usuarios.
 
 -->
+<?php
+session_start();
+
+if (!empty($_SESSION)) {
+    
+    include_once ('scriptConexionBD.php');
+    $conn = dbConnect();
+    $Login = $_SESSION['usuario'];
+    
+    $sql = "SELECT ultConexion FROM usuarios WHERE login='$Login';";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    
+    while ($usuario = mysqli_fetch_assoc($result)) {
+        $conex = $usuario['ultConexion'];
+    }
+       
+    $conex = date("d/m/Y H:i:s", strtotime($conex));
+    header('Location: ficherosUsuario.php?ult=' . $conex);
+}
+?>
+
 <html>
     <head>
         <meta charset='utf-8'>
@@ -17,54 +39,52 @@
         <script src="js/dropzone.js"></script>
     </head>
     <body>
-    <div class="bodybg">
+        <div class="bodybg">
 
-        <div id="container" style="width: 30%; margin-left: auto; margin-right: auto; position: relative">
-			<div class="panel panel-default" style="text-align: center; position: absolute; margin-top: 40%;">
-			<div class="panel-heading">Iniciar sesión</div>
- 			 <div class="panel-body">
-            <div class="form-inline">
-                <div class="panel-body">
-                    <form action="scriptComprobarSesion.php" method="post">
+            <div id="container" style="width: 30%; margin-left: auto; margin-right: auto; position: relative">
+                <div class="panel panel-default" style="text-align: center; position: absolute; margin-top: 40%;">
+                    <div class="panel-heading">Iniciar sesión</div>
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <div class="panel-body">
+                                <form action="scriptComprobarSesion.php" method="post">
 
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                            <input name="user" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
-                            <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>
-                        </div>
-                        <br>
-                        <br>
-                         <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Iniciar sesión</button>
-                    </form>
-                    <a id="newCuenta" href="nuevaCuenta.php">Registrarse</a>
-                    <br>
-                    <?php 
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                                        <input name="user" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" required>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+                                        <input name="pass" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Iniciar sesión</button>
+                                </form>
+                                <a id="newCuenta" href="nuevaCuenta.php">Registrarse</a>
+                                <br>
+                                <?php
+                                if (isset($_GET['success'])) {
+                                    echo '<br>';
+                                    echo '<div class="alert alert-success" role="alert">';
+                                    echo 'La cuenta ha sido creada correctamente. Inicie sesión.';
+                                    echo '</div>';
+                                }
+                                /* Comprobamos si ha habido algún error y lo mostramos como una alerta */
+                                if (isset($_GET['error'])) {
+                                    echo '<div class="alert alert-danger" role="alert">';
+                                    echo $_GET['error'];
+                                    echo '</div>';
+                                }
+                                ?>
 
-                    if (isset($_GET['success'])){
-                    	echo '<br>';
-                        echo '<div class="alert alert-success" role="alert">';
-                        echo 'La cuenta ha sido creada correctamente. Inicie sesión.';
-                        echo '</div>';
-                    }
-                    /* Comprobamos si ha habido algún error y lo mostramos como una alerta*/
-                    if (isset($_GET['error'])){
-                        echo '<div class="alert alert-danger" role="alert">';
-                        echo $_GET['error'];
-                        echo '</div>';
-                    }
-
-                    ?>
-
-                </div></div>
-                </div>
+                            </div></div>
+                    </div>
                 </div>      
-                </div>
+            </div>
         </div>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

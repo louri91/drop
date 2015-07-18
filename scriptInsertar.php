@@ -7,9 +7,22 @@
 <?php
 session_start();
 include_once ('scriptConexionBD.php');
-$conn = dbConnect();
-$Login = $_SESSION['usuario'];
+
+
 if (!empty($_FILES)) {
+    
+    $conn = dbConnect();
+    $Login = $_SESSION['usuario'];
+    
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        $IP = $_SERVER['HTTP_CLIENT_IP'];
+       
+    else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $IP = $_SERVER['HTTP_X_FORWARDED_FOR'];
+   
+    else $IP = $_SERVER['REMOTE_ADDR'];
+
+    
     $Nombre = $_FILES['archivo']['name'];
     $Tipo = $_FILES['archivo']['type'];
     $Tam = $_FILES['archivo']['size'];
@@ -22,13 +35,13 @@ if (!empty($_FILES)) {
     $contenido = addslashes($contenido);
     fclose($fp);
 
-    $sql = "INSERT INTO archivos VALUES (0, '$Nombre', '$contenido', '$Tipo', '$fechaHoy', '$Tam', 'correo', '$Login');";
+    $sql = "INSERT INTO archivos VALUES (0, '$Nombre', '$contenido', '$Tipo', '$fechaHoy', '$Tam', 'correo', '$Login', '$IP');";
 
     if (mysqli_query($conn, $sql)) {
         mysqli_close($conn);
         ?>
         <script type="text/javascript">
-            alert("Todo correcto");
+            location.href = "index.php";
         </script>
         <?php
     } else {

@@ -9,16 +9,20 @@ include_once ('scriptConexionBD.php');
 $conn = dbConnect();
 $id = $_GET['id'];
 
-$sql = "SELECT tipo, contenido FROM archivos WHERE id='$id';";
+$sql = "SELECT nombre, contenido, tipo, tamanio FROM archivos WHERE id='$id';";
 
 $result = mysqli_query($conn, $sql);
 
 while ($archivo = mysqli_fetch_assoc($result)) {
-    $tipo = $archivo['tipo'];
+    $nombre = $archivo['nombre'];    
     $contenido = $archivo['contenido'];
+    $tipo = $archivo['tipo'];
+    $tamanio = $tamanio['tamanio'];
 }
 
-header("Content-type: $tipo");
+    header("Content-type: $tipo");
+    //header("Content-length: $tamanio"); 
+    //header("Content-Disposition: inline; filename=$nombre"); 
 //header("Content-Disposition: attachment; filename='Practica1.pdf'");
 print $contenido;
 ?>

@@ -35,9 +35,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="ficherosUsuario.php">Inicio <span class="sr-only">(current)</span></a></li>
+        <li><a href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="formulario.php">Subir Ficheros</a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="modificarCuenta.php">Modificar Cuenta</a></li>
+        <li><a href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
       </ul>
     <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  '.$_SESSION['usuario'];?></div>
 

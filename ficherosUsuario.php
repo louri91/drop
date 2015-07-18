@@ -1,4 +1,7 @@
-<html><?php session_start(); ?>
+<html><?php
+    session_start();
+    $oldarchivo = ""
+    ?>
     <head>
         <title>Inicio</title>
         <meta charset='utf-8'>
@@ -13,81 +16,97 @@
 
     </head>
     <body>
-    <div class="bodybg">
+        <div class="bodybg">
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Drop</a>
-    </div>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.php">Drop</a>
+                    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="ficherosUsuario.php">Inicio <span class="sr-only">(current)</span></a></li>
-        <li><a href="formulario.php">Subir Ficheros</a></li>
-        <li><a href="#">Link</a></li>
-      </ul>
-    <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  '.$_SESSION['usuario'];?></div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
+                            <li><a href="formulario.php">Subir Ficheros</a></li>
+                            <li><a href="modificarCuenta.php">Modificar Cuenta</a></li>
+                            <li><a href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
+                        </ul>
+                        <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  ' . $_SESSION['usuario']; ?></div>
 
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" id="busqueda" name="busqueda" onkeyup="MostrarConsultaNombre();" class="form-control" placeholder="Buscar">
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <input type="text" id="busqueda" name="busqueda" onkeyup="MostrarConsultaNombre();" class="form-control" placeholder="Buscar">
+                            </div>
+                        </form>
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+            <div class="container" style="width: auto; margin-left: auto; margin-right: auto; position: relative">
+                <div class="panel panel-default" style="margin-top: 5%;">
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <div class="panel-body">
+                                <?php
+                                $Login = $_SESSION['usuario'];
+                                include_once 'scriptConexionBD.php';
+                                $conn = dbConnect();
+                                $sql = "SELECT id, nombre, tamanio, ultimaSub FROM archivos WHERE Usuarios_login = '$Login' ORDER BY nombre, ultimaSub DESC;";
+                                $result = mysqli_query($conn, $sql);
+
+                                echo '<table class="table table-hover">';
+                                echo '<thead>';
+                                echo '<th>Nombre de Archivo</th>';
+                                echo '<th>Tamaño</th>';
+                                echo '<th>Fecha de Subida</th>';
+                                echo '</thead>';
+                                echo '<tbody id="ficheros">';
+                                while ($archivo = mysqli_fetch_assoc($result)) {
+                                    if ($oldarchivo == $archivo['nombre']) {
+                                        echo '<tr class="breadcrumb">';
+                                    } else {
+                                        '<tr>';
+                                    }
+                                    ?>
+                                    <td><a href="scriptDescargar.php?id=<?php echo $archivo['id']; ?>"><?php echo $archivo['nombre']; ?></a></td>
+                                    <td><?php
+                                if ($archivo['tamanio'] < 1024) {
+                                    echo "{$archivo['tamanio']} bytes";
+                                } else if ($archivo['tamanio'] < 1048576) {
+                                    $size_kb = round($archivo['tamanio'] / 1024);
+                                    echo "{$size_kb} KB";
+                                } else {
+                                    $size_mb = round($archivo['tamanio'] / 1048576, 1);
+                                    echo "{$size_mb} MB";
+                                }
+                                    ?></td>
+                                    <td><?php echo date("d/m/Y H:i:s", strtotime($archivo['ultimaSub'])); ?></td>
+                                    </tr>
+
+                                    <?php
+                                    $oldarchivo = $archivo['nombre'];
+                                }
+
+                                mysqli_close($conn);
+                                ?>
+                                </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </form>
-        
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-    <div class="container" style="width: auto; margin-left: auto; margin-right: auto; position: relative">
-    <div class="panel panel-default" style="margin-top: 5%;">
-    <div class="panel-body">
-    <div class="form-inline">
-    <div class="panel-body">
-        <?php
-        $Login = $_SESSION['usuario'];
-        include_once 'scriptConexionBD.php';
-        $conn = dbConnect();
-        $sql = "SELECT id, nombre, tamanio, ultimaMod FROM archivos WHERE Usuarios_login = '$Login' ORDER BY nombre;";
-        $result = mysqli_query($conn, $sql);
-        
-        echo '<table class="table table-hover">';
-        echo '<thead>';
-        echo '<th>Nombre de Archivo</th>';
-        echo '<th>Tamaño</th>';
-        echo '<th>Fecha de Creación</th>';
-        echo '</thead>';
-        echo '<tbody id="ficheros">';
-        while ($archivo = mysqli_fetch_assoc($result)) {
-            ?>
-           
-                <tr>
-                    <td><a href="scriptDescargar.php?id=<?php echo $archivo['id']; ?>"><?php echo $archivo['nombre']; ?></a></td>
-                    <td><?php echo $archivo['tamanio']; ?></td>
-                    <td><?php echo $archivo['ultimaMod']; ?></td>
-                </tr>
-
-            <?php
-        }
-        mysqli_close($conn);
-        ?>
-        </tbody>
-        </table>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    </div>
 </body>
 </html>
