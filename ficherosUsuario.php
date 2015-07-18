@@ -1,7 +1,9 @@
 <html><?php
     session_start();
-    $oldarchivo = ""
+    $oldarchivo = "";
+            
     ?>
+    
     <head>
         <title>Inicio</title>
         <meta charset='utf-8'>
@@ -76,20 +78,20 @@
                                     } else {
                                         '<tr>';
                                     }
-                                    ?>
-                                    <td><a href="scriptDescargar.php?id=<?php echo $archivo['id']; ?>"><?php echo $archivo['nombre']; ?></a></td>
+                                    ?><td><a href="scriptDescargar.php?id=<?php echo $archivo['id']; ?>"><?php echo $archivo['nombre']; ?></a></td>
                                     <td><?php
-                                if ($archivo['tamanio'] < 1024) {
-                                    echo "{$archivo['tamanio']} bytes";
-                                } else if ($archivo['tamanio'] < 1048576) {
-                                    $size_kb = round($archivo['tamanio'] / 1024);
-                                    echo "{$size_kb} KB";
-                                } else {
-                                    $size_mb = round($archivo['tamanio'] / 1048576, 1);
-                                    echo "{$size_mb} MB";
-                                }
-                                    ?></td>
+                                        if ($archivo['tamanio'] < 1024) {
+                                            echo "{$archivo['tamanio']} bytes";
+                                        } else if ($archivo['tamanio'] < 1048576) {
+                                            $size_kb = round($archivo['tamanio'] / 1024);
+                                            echo "{$size_kb} KB";
+                                        } else {
+                                            $size_mb = round($archivo['tamanio'] / 1048576, 1);
+                                            echo "{$size_mb} MB";
+                                        }
+                                        ?></td>
                                     <td><?php echo date("d/m/Y H:i:s", strtotime($archivo['ultimaSub'])); ?></td>
+                                    <td><button class="btn btn-danger" onclick="myFunction(<?php echo $archivo['id']; ?>)">Eliminar</button></td>
                                     </tr>
 
                                     <?php
@@ -103,20 +105,23 @@
 
                             </div>
                         </div>
-                        <?php 
-              if(isset($_GET['ult'])){
-                echo '<br>';
-                echo '<div class="container" style="width: auto; text-align: right">';
-                echo '<div class="alert alert-info" role="alert">';
-                echo 'Última conexión: '.$_GET['ult'];
-                echo '</div></div>';
-              }
-
-              ?>
+                        <?php
+                        if (isset($_GET['ult'])) {
+                            echo '<br>';
+                            echo '<div class="container" style="width: auto; text-align: right">';
+                            echo '<div class="alert alert-info" role="alert">';
+                            echo 'Última conexión: ' . $_GET['ult'];
+                            echo '</div></div>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+        <script languaje="javascript">
+    function myFunction(identificador){
+        location.href = ("scriptEliminarArchivo.php?id=" + identificador);
+    }
+    </script>
+    </body>
 </html>
