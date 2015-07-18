@@ -88,16 +88,7 @@
               <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Terminado</span>image-01.jpg</a>
               <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Terminado</span>image-02.jpg</a>
             </div>
-            <?php 
-              if(isset($_GET['ult'])){
-                echo '<br>';
-                echo '<div class="container" style="width: auto; text-align: right">';
-                echo '<div class="alert alert-info" role="alert">';
-                echo 'Última conexión: '.$_GET['ult'];
-                echo '</div></div>';
-              }
-
-              ?>
+            
           </div>
         </div>
       </div>

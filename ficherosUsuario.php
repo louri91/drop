@@ -103,6 +103,16 @@
 
                             </div>
                         </div>
+                        <?php 
+              if(isset($_GET['ult'])){
+                echo '<br>';
+                echo '<div class="container" style="width: auto; text-align: right">';
+                echo '<div class="alert alert-info" role="alert">';
+                echo 'Última conexión: '.$_GET['ult'];
+                echo '</div></div>';
+              }
+
+              ?>
                     </div>
                 </div>
             </div>
