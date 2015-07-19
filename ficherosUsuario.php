@@ -1,9 +1,8 @@
 <html><?php
     session_start();
     $oldarchivo = "";
-            
     ?>
-    
+
     <head>
         <title>Inicio</title>
         <meta charset='utf-8'>
@@ -14,7 +13,7 @@
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
         <link href="css/bootstrap-dialog.css" rel="stylesheet">
-        
+
     </head>
     <body>
         <div class="bodybg">
@@ -61,7 +60,7 @@
                                 $Login = $_SESSION['usuario'];
                                 include_once 'scriptConexionBD.php';
                                 $conn = dbConnect();
-                                $sql = "SELECT id, nombre, tamanio, ultimaSub FROM archivos WHERE Usuarios_login = '$Login' ORDER BY nombre, ultimaSub DESC;";
+                                $sql = "SELECT DISTINCT archivos.id, archivos.nombre, archivos.tamanio, archivos.ultimaSub, archivos.Usuarios_login FROM archivos, compartidos WHERE archivos.Usuarios_login = '$Login' OR (compartidos.login = '$Login' AND archivos.id = compartidos.id) ORDER BY nombre, ultimaSub DESC;";
                                 $result = mysqli_query($conn, $sql);
 
                                 echo '<table class="table table-hover">';
@@ -69,6 +68,7 @@
                                 echo '<th>Nombre de Archivo</th>';
                                 echo '<th>Tamaño</th>';
                                 echo '<th>Fecha de Subida</th>';
+                                echo '<th>Propietario</th>';
                                 echo '</thead>';
                                 echo '<tbody id="ficheros">';
                                 while ($archivo = mysqli_fetch_assoc($result)) {
@@ -90,7 +90,32 @@
                                         }
                                         ?></td>
                                     <td><?php echo date("d/m/Y H:i:s", strtotime($archivo['ultimaSub'])); ?></td>
-                                    <td><button class="btn btn-danger" onclick="myFunction(<?php echo $archivo['id']; ?>)">Eliminar</button></td>
+                                    <td><?php if ($archivo['Usuarios_login'] != $Login) echo $archivo['Usuarios_login']; ?></td>
+
+                                    <?php
+                                    if ($oldarchivo == $archivo['nombre']) {
+                                        echo '<td>';
+                                    } else if ($archivo['Usuarios_login'] != $Login) {
+                                        echo '<td>';
+                                    } else {
+                                        ?>
+                                        <td><button class="btn btn-info" onclick="FunctionCompartir(<?php echo $archivo['id']; ?>)">Compartir</button></td>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if ($archivo['Usuarios_login'] == $Login) {
+                                        ?>
+                                        <td><button class="btn btn-danger" onclick="FunctionEliminar(<?php echo $archivo['id']; ?>)">Eliminar</button></td>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <td><button class="btn btn-warning" onclick="FunctionAbandonar(<?php echo $archivo['id']; ?>)">Abandonar</button></td>
+                                        <?php
+                                    }
+                                    ?>
+
                                     </tr>
 
                                     <?php
@@ -118,26 +143,32 @@
             </div>
         </div>
 
-        
-            <?php
-            /* Comprobamos si ha habido algún error y lo mostramos como una alerta */
-            if (isset($_GET['error'])) {
-                echo '<div class="alert alert-danger" role="alert">';
-                echo $_GET['error'];
-                echo '</div>';
-            }
-            ?>
-        
-    <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap-dialog.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/nuestro.js"></script>
 
-    <script languaje="javascript">
-    function myFunction(identificador){
-        location.href = ("scriptEliminarArchivo.php?id=" + identificador);
-    }
-    </script>
+        <?php
+        /* Comprobamos si ha habido algún error y lo mostramos como una alerta */
+        if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">';
+            echo $_GET['error'];
+            echo '</div>';
+        }
+        ?>
+
+        <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/nuestro.js"></script>
+
+        <script languaje="javascript">
+                                             function FunctionEliminar(identificador) {
+                                                 location.href = ("scriptEliminarArchivo.php?id=" + identificador);
+                                             }
+                                             function FunctionCompartir(identificador) {
+                                                 location.href = ("scriptCompartir.php?id=" + identificador);
+                                             }
+                                             function FunctionAbandonar(identificador) {
+                                                 location.href = ("scriptAbandonar.php?id=" + identificador);
+                                             }
+        </script>
     </body>
 </html>
