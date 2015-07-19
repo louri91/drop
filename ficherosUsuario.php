@@ -36,11 +36,21 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
                             <li><a href="formulario.php">Subir Ficheros</a></li>
-                            <li><a id="modificar" href="#">Modificar Cuenta</a></li>
-                            <li><a href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
                         </ul>
-                        <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  ' . $_SESSION['usuario']; ?></div>
-
+                        <div class="navbar-right">
+                        <div class="dropdown">
+                        <div class="dropdown-toggle" id="menu1" type="button" data-toggle="dropdown" style="margin-top: 25%;">
+                            <span class="glyphicon glyphicon-user"></span>
+                                <?php echo '  ' . $_SESSION['usuario']; ?>
+                            <span class="caret"></span>
+                        </div>
+                        
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <li role="presentation"><a id="modificar" role="menuitem" tabindex="-1" href="#">Configuración</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
+                        </ul>
+                        </div>
+                        </div>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
                                 <input type="text" id="busqueda" name="busqueda" onkeyup="MostrarConsultaNombre();" class="form-control" placeholder="Buscar">
@@ -158,6 +168,9 @@
         <script src="js/bootstrap-dialog.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/nuestro.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
         <script languaje="javascript">
              function FunctionEliminar(identificador) {
