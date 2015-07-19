@@ -45,7 +45,7 @@ if ($result->num_rows == 1 && $oldcorreo != $correo) {
         $Success = "";
             ?>
             <script languaje="javascript">
-                location.href = "modificarCuenta.php?success=<?php echo $Success ?>";
+                location.href = "ficherosUsuario.php?success=<?php echo $Success ?>";
             </script>
             <?php
         
@@ -54,7 +54,7 @@ if ($result->num_rows == 1 && $oldcorreo != $correo) {
     //header('Location: nuevaCuenta.php?error='.$Error);
     ?>
     <script languaje="javascript">
-        location.href = "modificarCuenta.php?error=<?php echo $Error ?>";
+        location.href = "ficherosUsuario.php?error=<?php echo $Error ?>";
     </script>
     <?php
     }

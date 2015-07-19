@@ -25,3 +25,10 @@ function MostrarConsultaNombre(){
     }
     ajax.send(null);
 }
+
+$('#modificar').on('click',function(){
+        BootstrapDialog.show({
+            title: 'Modificar Cuenta',
+            message: $('<div></div>').load('modificarCuenta.php')
+        });
+});

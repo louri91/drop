@@ -13,9 +13,8 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/nuestro.js"></script>
-
+        <link href="css/bootstrap-dialog.css" rel="stylesheet">
+        
     </head>
     <body>
         <div class="bodybg">
@@ -38,7 +37,7 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
                             <li><a href="formulario.php">Subir Ficheros</a></li>
-                            <li><a href="modificarCuenta.php">Modificar Cuenta</a></li>
+                            <li><a id="modificar" href="#">Modificar Cuenta</a></li>
                             <li><a href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
                         </ul>
                         <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  ' . $_SESSION['usuario']; ?></div>
@@ -118,7 +117,24 @@
                 </div>
             </div>
         </div>
-        <script languaje="javascript">
+
+        
+            <?php
+            /* Comprobamos si ha habido algún error y lo mostramos como una alerta */
+            if (isset($_GET['error'])) {
+                echo '<div class="alert alert-danger" role="alert">';
+                echo $_GET['error'];
+                echo '</div>';
+            }
+            ?>
+        
+    <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-dialog.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/nuestro.js"></script>
+
+    <script languaje="javascript">
     function myFunction(identificador){
         location.href = ("scriptEliminarArchivo.php?id=" + identificador);
     }

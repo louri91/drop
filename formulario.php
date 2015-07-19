@@ -6,12 +6,9 @@
    <meta content="text/html; charset=utf-8" />
    <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/css.css">
-   <link rel="stylesheet" href="css/bootstrap-theme.css">
-   <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
-   <script type="text/javascript" src="js/bootstrap.js"></script>
-   <script type="text/javascript" src="js/nuestro.js"></script>
-   <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
-   <script src="js/dropzone.js"></script>
+  <link rel="stylesheet" href="css/bootstrap-theme.css">
+  <link href="css/bootstrap-dialog.css" rel="stylesheet">
+   
     </head>
     <body>
     
@@ -37,7 +34,7 @@
       <ul class="nav navbar-nav">
         <li><a href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="formulario.php">Subir Ficheros</a></li>
-        <li><a href="modificarCuenta.php">Modificar Cuenta</a></li>
+        <li><a id="modificar" href="#">Modificar Cuenta</a></li>
         <li><a href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
       </ul>
     <div class="navbar-brand navbar-right"><span class="glyphicon glyphicon-user"></span><?php echo '  '.$_SESSION['usuario'];?></div>
@@ -94,4 +91,10 @@
       </div>
     </div></div> <!-- /container -->
     </body>
+
+    <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-dialog.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/nuestro.js"></script>
 </html>
