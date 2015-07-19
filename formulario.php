@@ -8,12 +8,14 @@
   <link rel="stylesheet" href="css/css.css">
   <link rel="stylesheet" href="css/bootstrap-theme.css">
   <link href="css/bootstrap-dialog.css" rel="stylesheet">
-   
+  <link rel="stylesheet" href="css/dropzone.css">
+  <link rel="stylesheet" href="css/basic.css">
+
+  <div class="bodybg">
+
     </head>
     <body>
-    
-    <div class="bodybg">
-
+  
 <!--  MENU  -->
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -54,40 +56,12 @@
       <div class="panel panel-default" style="margin-top: 5%;">
         <div class="panel-body">
 
-          <!-- Standar Form -->
-          <h4>Selecciona un fichero del ordenador</h4>
-          <form action="scriptInsertar.php" method="post" enctype="multipart/form-data" id="js-upload-form">
-            <div class="form-inline">
-              <div class="form-group">
-                <input type="file" name="archivo" id="archivo" class="js-upload-files" required>
-              </div>
-              <button type="submit" name="Enviar" class="btn btn-sm btn-primary" id="js-upload-submit">Subir Archivos</button>
-            </div>
+          <form action="scriptInsertar.php" class="dropzone" id="my-awesome-dropzone" method="post" enctype="multipart/form-data" style="margin-top:3%;">
+            <div class="fallback"></div>
+            <div class="dz-message">Arrastre hasta aquí sus ficheros</div>
           </form>
 
-          <!-- Drop Zone -->
-          <h4>O arrastra hasta aquí</h4>
-          <div class="upload-drop-zone" id="drop-zone">
-            Arrastra hasta aquí tus archivos
-          </div>
-
-          <!-- Progress Bar -->
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-              <span class="sr-only">60% Completado</span>
-            </div>
-          </div>
-
-          <!-- Upload Finished -->
-          <div class="js-upload-finished">
-            <h3>Fichero procesado</h3>
-            <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Terminado</span>image-01.jpg</a>
-              <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Terminado</span>image-02.jpg</a>
-            </div>
-            
-          </div>
-        </div>
+          
       </div>
     </div></div> <!-- /container -->
     </body>
@@ -97,4 +71,7 @@
     <script src="js/bootstrap-dialog.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/nuestro.js"></script>
+    <script type="text/javascript" src="js/dropzone.js"></script>
+    <script type="text/javascript" src="js/dropzone-amd-module.js"></script>
+
 </html>
