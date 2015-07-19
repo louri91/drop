@@ -160,15 +160,18 @@
         <script type="text/javascript" src="js/nuestro.js"></script>
 
         <script languaje="javascript">
-                                             function FunctionEliminar(identificador) {
-                                                 location.href = ("scriptEliminarArchivo.php?id=" + identificador);
-                                             }
-                                             function FunctionCompartir(identificador) {
-                                                 location.href = ("scriptCompartir.php?id=" + identificador);
-                                             }
-                                             function FunctionAbandonar(identificador) {
-                                                 location.href = ("scriptAbandonar.php?id=" + identificador);
-                                             }
+             function FunctionEliminar(identificador) {
+                 location.href = ("scriptEliminarArchivo.php?id=" + identificador);
+             }
+             function FunctionCompartir(identificador) {
+                BootstrapDialog.show({
+                    title: 'Compartir Archivo',
+                    message: $('<div></div>').load("compartirArchivos.php?id=" + identificador)
+                });
+             }
+             function FunctionAbandonar(identificador) {
+                 location.href = ("scriptAbandonar.php?id=" + identificador);
+             }
         </script>
     </body>
 </html>
