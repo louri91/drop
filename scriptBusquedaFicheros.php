@@ -2,9 +2,10 @@
 session_start();
 $Login = $_SESSION['usuario'];
 $Busqueda = $_GET['busqueda'];
+$oldarchivo = "";
 include_once 'scriptConexionBD.php';
 $conn = dbConnect();
-$sql = "SELECT id, nombre, tamanio, ultimaSub FROM archivos WHERE Usuarios_login = '$Login' AND nombre like '%$Busqueda%'";
+$sql = "SELECT * FROM archivos WHERE Usuarios_login = '$Login' AND nombre like '%$Busqueda%'";
 $result = mysqli_query($conn, $sql);
 
 while ($archivo = mysqli_fetch_assoc($result)) {
@@ -23,10 +24,39 @@ while ($archivo = mysqli_fetch_assoc($result)) {
         echo "{$size_mb} MB";
     }
     ?></td>
-        <td><?php echo $archivo['ultimaSub']; ?></td>
+
+    <td><?php echo date("d/m/Y H:i:s", strtotime($archivo['ultimaSub'])); ?></td>
+    <td><?php if ($archivo['Usuarios_login'] != $Login) echo $archivo['Usuarios_login']; ?></td>
+
+    <?php
+    if ($oldarchivo == $archivo['nombre']) {
+        echo '<td>';
+    } else if ($archivo['Usuarios_login'] != $Login) {
+        echo '<td>';
+    } else {
+        ?>
+        <td><button class="btn btn-info" onclick="FunctionCompartir(<?php echo $archivo['id']; ?>)">Compartir</button></td>
+        <?php
+    }
+    ?>
+
+    <?php
+    if ($archivo['Usuarios_login'] == $Login) {
+        ?>
+        <td><button class="btn btn-danger" onclick="FunctionEliminar(<?php echo $archivo['id']; ?>)">Eliminar</button></td>
+        <?php
+    } else {
+        ?>
+        <td><button class="btn btn-warning" onclick="FunctionAbandonar(<?php echo $archivo['id']; ?>)">Abandonar</button></td>
+        <?php
+    }
+    ?>
+
     </tr>
 
     <?php
-}
-mysqli_close($conn);
-?>
+    $oldarchivo = $archivo['nombre'];
+
+    }
+    mysqli_close($conn);
+    ?>
