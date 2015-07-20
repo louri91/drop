@@ -19,6 +19,9 @@ if($tipo=="image/png"){
 if($tipo=="image/jpeg"){
 	echo '<img src="data:image/jpeg;base64,'.base64_encode($contenido).'">';
 }
+if($tipo=="image/gif"){
+	echo '<img src="data:image/gif;base64,'.base64_encode($contenido).'">';
+}
 
 header("Content-type:". $archivo['tipo']);
 
@@ -26,11 +29,17 @@ if($tipo=="application/pdf"){
 	print $contenido;
 }
 
-//header("Content-type:". $archivo['tipo']);
-//header("Content-length:". $tamanio);
-//header("Cache-control: private");
-//header("Content-Disposition: inline; filename=$nombre");
-//header("Content-Disposition: attachment; filename='Practica1.pdf'");
-//echo $archivo['contenido'];
-//echo base64_decode($archivo['contenido']);
+if($tipo!="image/png" && $tipo!="image/jpeg" && $tipo!="application/pdf" && $tipo!="image/gif"){
+	header("Pragma: public"); // required 
+	header("Expires: 0"); 
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+	header("Cache-Control: private",false); // required for certain browsers 
+	header("Content-type:". $archivo['tipo']);
+	header("Content-Disposition: attachment; filename=".$nombre); 
+	header("Content-Transfer-Encoding: binary"); 
+	header("Content-Length: ".$tamanio);  
+	ob_clean(); 
+	flush(); 
+	echo $contenido;
+}
 ?>
