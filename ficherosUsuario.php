@@ -38,18 +38,18 @@
                             <li><a href="formulario.php">Subir Ficheros</a></li>
                         </ul>
                         <div class="navbar-right">
-                        <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" id="menu1" type="button" data-toggle="dropdown" style="margin-top: 10%;  margin-left: -8%">
-                            <span class="glyphicon glyphicon-user"></span>
-                                <?php echo '  ' . $_SESSION['usuario']; ?>
-                            <span class="caret"></span>
-                        </button>
-                        
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a id="modificar" role="menuitem" tabindex="-1">Configuración</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
-                        </ul>
-                        </div>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" id="menu1" type="button" data-toggle="dropdown" style="margin-top: 10%;  margin-left: -8%">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <?php echo '  ' . $_SESSION['usuario']; ?>
+                                    <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li role="presentation"><a id="modificar" role="menuitem" tabindex="-1">Configuración</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
@@ -64,8 +64,19 @@
             <div class="container" style="width: auto; margin-left: auto; margin-right: auto; position: relative">
                 <div class="panel panel-default" style="margin-top: 5%;">
                     <div class="panel-body">
+
                         <div class="form-inline">
+
                             <div class="panel-body">
+                                <?php
+                                /* Comprobamos si ha habido algún error y lo mostramos como una alerta */
+                                if (isset($_GET['error'])) {
+                                    echo '<div class="alert alert-danger" role="alert">';
+                                    echo $_GET['error'];
+                                    echo '</div>';
+                                }
+                                ?>
+
                                 <?php
                                 $Login = $_SESSION['usuario'];
                                 include_once 'scriptConexionBD.php';
@@ -79,6 +90,7 @@
                                 echo '<th>Tamaño</th>';
                                 echo '<th>Fecha de Subida</th>';
                                 echo '<th>Propietario</th>';
+                                echo '<th>Compartido con</th>';
                                 echo '</thead>';
                                 echo '<tbody id="ficheros">';
                                 while ($archivo = mysqli_fetch_assoc($result)) {
@@ -101,6 +113,22 @@
                                         ?></td>
                                     <td><?php echo date("d/m/Y H:i:s", strtotime($archivo['ultimaSub'])); ?></td>
                                     <td><?php if ($archivo['Usuarios_login'] != $Login) echo $archivo['Usuarios_login']; ?></td>
+                                    <td>
+
+                                        <?php
+                                        $id = $archivo['id'];
+                                        $sql1 = "SELECT login FROM compartidos WHERE id = '$id';";
+                                        $result1 = mysqli_query($conn, $sql1);
+                                        while ($compartido = mysqli_fetch_assoc($result1)) {
+                                            if ($archivo['Usuarios_login'] == $_SESSION['usuario']) {
+                                                ?><a href="scriptDescompartir.php?login=<?php echo $compartido['login']; ?>&id=<?php echo $id; ?>"><?php echo $compartido['login']; ?></a><?php
+                                            } else {
+                                                echo $compartido['login'];
+                                            }
+                                            echo " | ";
+                                        }
+                                        ?>
+                                    </td>
 
                                     <?php
                                     if ($oldarchivo == $archivo['nombre']) {
@@ -148,20 +176,14 @@
                             echo '</div></div>';
                         }
                         ?>
+
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <?php
-        /* Comprobamos si ha habido algún error y lo mostramos como una alerta */
-        if (isset($_GET['error'])) {
-            echo '<div class="alert alert-danger" role="alert">';
-            echo $_GET['error'];
-            echo '</div>';
-        }
-        ?>
+
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -172,20 +194,22 @@
 
 
         <script languaje="javascript">
-             function FunctionEliminar(identificador) {
-                 location.href = ("scriptEliminarArchivo.php?id=" + identificador);
-             }
-             function FunctionCompartir(identificador) {
-                BootstrapDialog.show({
-                    title: 'Compartir Archivo',
-                    message: $('<div></div>').load("compartirArchivos.php?id=" + identificador)
-                });
-             }
-             function FunctionAbandonar(identificador) {
-                 location.href = ("scriptAbandonar.php?id=" + identificador);
-             }
+                                            function FunctionEliminar(identificador) {
+                                                location.href = ("scriptEliminarArchivo.php?id=" + identificador);
+                                            }
+                                            function FunctionCompartir(identificador) {
+                                                BootstrapDialog.show({
+                                                    title: 'Compartir Archivo',
+                                                    message: $('<div></div>').load("compartirArchivos.php?id=" + identificador)
+                                                });
+                                            }
+                                            function FunctionAbandonar(identificador) {
+                                                location.href = ("scriptAbandonar.php?id=" + identificador);
+                                            }
 
-             $(document).ready(function () { $('.dropdown-toggle').dropdown(); });
+                                            $(document).ready(function () {
+                                                $('.dropdown-toggle').dropdown();
+                                            });
 
         </script>
     </body>

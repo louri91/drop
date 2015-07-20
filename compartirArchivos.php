@@ -24,11 +24,11 @@
         ?>
 
         <form action='scriptCompartir.php?id=<?php echo $id;?>' method="post">
-            <label>Indique el correo electrónico de la persona con quien quiere compartir el archivo: </label>
+            <label>Indique el login del usuario con quien quiere compartir el archivo: </label>
 
             <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
-                <input value="" name="correo" type="email" class="form-control" aria-describedby="basic-addon1" required>
+                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                <input value="" name="login" type="text" class="form-control" aria-describedby="basic-addon1" required>
             </div>
             <br>
             <br>
