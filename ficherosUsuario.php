@@ -39,14 +39,14 @@
                         </ul>
                         <div class="navbar-right">
                         <div class="dropdown">
-                        <div class="dropdown-toggle" id="menu1" type="button" data-toggle="dropdown" style="margin-top: 25%;">
+                        <button class="btn btn-default dropdown-toggle" id="menu1" type="button" data-toggle="dropdown" style="margin-top: 10%;  margin-left: -8%">
                             <span class="glyphicon glyphicon-user"></span>
                                 <?php echo '  ' . $_SESSION['usuario']; ?>
                             <span class="caret"></span>
-                        </div>
+                        </button>
                         
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a id="modificar" role="menuitem" tabindex="-1" href="#">Configuración</a></li>
+                            <li role="presentation"><a id="modificar" role="menuitem" tabindex="-1">Configuración</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="scriptCerrarSesion.php">Cerrar Sesión</a></li>
                         </ul>
                         </div>
@@ -163,13 +163,12 @@
         }
         ?>
 
-        <script src="http://code.jquery.com/jquery-2.0.3.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap-dialog.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/nuestro.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
         <script languaje="javascript">
@@ -185,6 +184,9 @@
              function FunctionAbandonar(identificador) {
                  location.href = ("scriptAbandonar.php?id=" + identificador);
              }
+
+             $(document).ready(function () { $('.dropdown-toggle').dropdown(); });
+
         </script>
     </body>
 </html>
